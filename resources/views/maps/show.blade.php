@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     <title>Tracking on Map</title>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
@@ -45,7 +47,7 @@
 
 
 
-                var map = L.map('map').setView(center, 13);
+                var map = L.map('map').setView(center, 11);
 
                 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -62,15 +64,18 @@
      var customTitle ="";
 
         for (var i= 0; i < locations.length; i++ ) {
-            customTitle = i.toString();
-                if (i == (locations. length - 1) ) {
-                     $customTitle = "last point" ;
+            console.log(locations[i][0], locations[i][1])
+            customTitle = (i+1).toString();
+                if (  i == (locations.length - 1)  ) {
+                     customTitle = "last point" ;
                 }
 
                 marker = new L.marker([locations[i][0], locations[i][1]])
                 .addTo(map)
-                .bindPopup("test")
+                .bindPopup( customTitle)
                 .openPopup() ;
+
+
 
         }
 
@@ -82,7 +87,6 @@
 
 
 /*
-
         const popup = L.popup()
             .setLatLng([51.513, -0.09])
             .setContent('I am a standalone popup.')
@@ -99,13 +103,19 @@
         */
 
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
 
         $.ajax({
-            type:'GET',
+            type:'POST',
             url:'/tracking',
             dataType : 'json' ,
-           // data:'_token = <?php echo csrf_token() ?>',
             success:function(data) {
+               // console.log( data.slice(-1)[0]) ;
                 addToMap(data, data.slice(-1)[0])
             } ,
             error : function(request, error){

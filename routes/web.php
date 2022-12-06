@@ -47,7 +47,7 @@ Route::get('tracking/show', function () {
 })->name('tracking-show');
 
 
-Route::get('/tracking', function(){
+Route::post('/tracking', function(){
      $data = [
             [30.05072510744215, 31.30558905318965],
             [30.026746790297862, 31.310125341162862],
