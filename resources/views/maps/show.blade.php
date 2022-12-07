@@ -32,33 +32,11 @@
     function addToMap(locations, center){
 
 
-/*
-        var map = L.map('map'),{
-                           center : center,
-                           zoom : 12
-                        });
-
-
-               L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                }).addTo(map);
-*/
-
-
-
                 var map = L.map('map').setView(center, 11);
 
                 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(map);
-
-              /*
-                L.marker([51.5, -0.09]).addTo(map)
-                    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-                    .openPopup()
-*/
-
 
 
      var customTitle ="";
@@ -80,27 +58,23 @@
         }
 
 
+
+
+            function onMapClick(e) {
+                    L.popup()
+                    .setLatLng(e.latlng)
+                    .setContent(`You clicked the map at ${e.latlng.toString()}`)
+                    .openOn(map);
+            }
+
+            map.on('click', onMapClick);
+
+
+
+
     }
 
 
-
-
-
-/*
-        const popup = L.popup()
-            .setLatLng([51.513, -0.09])
-            .setContent('I am a standalone popup.')
-            .openOn(map);
-
-        function onMapClick(e) {
-            popup
-                .setLatLng(e.latlng)
-                .setContent(`You clicked the map at ${e.latlng.toString()}`)
-                .openOn(map);
-        }
-
-        map.on('click', onMapClick);
-        */
 
 
         $.ajaxSetup({

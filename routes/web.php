@@ -42,12 +42,21 @@ Route::get('/admin/dashboard',function(){
 
 // tracking on map
 
+// basic example for leaflet map
+Route::get('tracking/basic', function () {
+    return View('maps.basic');
+})->name('tracking-basic');
+
+
+// simulate for shiping tracking
 Route::get('tracking/show', function () {
     return View('maps.show');
 })->name('tracking-show');
 
 
 Route::post('/tracking', function(){
+
+    // this is simulate data for shiping tracking that we get from easypost
      $data = [
             [30.05072510744215, 31.30558905318965],
             [30.026746790297862, 31.310125341162862],
