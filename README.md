@@ -10,10 +10,11 @@
 
 # Description
 
-- this demo help to create Multiple Authentication Guards in laravel9
+- this demo simulate shipping tracking as we will receive from easypost 
+- we will use leaflet to draw the map with shipping points [lat  , lang]
 
 
-# How to Implement Multiple Authentication Guards in Laravel 9
+# How to run the demo
 
 ```
 composer install
@@ -27,6 +28,4 @@ php artisan serve
 
 
 
-# Routes for new guard ``admin`` :
-- admin login :  http://127.0.0.1:8000/admin
-- admin register : http://127.0.0.1:8000/admin/register
+✔Technologies :  Laravel 9  +  leaflet map +  javascript
